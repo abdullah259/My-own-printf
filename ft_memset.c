@@ -3,7 +3,46 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+static void ft_putnbr(int n)
+{
+    if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	else if (n < 0)
+	{
+		write(1, "-", 1);
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+	}
+	n = n % 10 + '0';
+	write(1, &n, 1);
+}
 
+static void ft_foru(int n)
+{
+    unsigned int a = n;
+    if (a == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	else if (a < 0)
+	{
+		write(1, "-", 1);
+		a *= -1;
+	}
+	if (a >= 10)
+	{
+		ft_foru(a / 10);
+	}
+	a = a % 10 + '0';
+	write(1, &a, 1);
+}
 int     ft_printf(const char *format, ...)
 {
     int i = 0;
@@ -37,12 +76,19 @@ int     ft_printf(const char *format, ...)
                     k++;
                 }
             }
-            else if (format[i] == 'i')
+
+            else if (format[i] == 'i' || format[i] == 'd')
             {
                 int g = va_arg(apy,int);
-                write(1,&g,1);
-                k++;
+                ft_putnbr(g);
             }
+            
+            else if (format[i] == 'u')
+            {
+                int e = va_arg(apy,int);
+                ft_foru(e);
+            }
+            
             else if (format[i] == '%')
             {
                 char t = '%';
@@ -50,6 +96,7 @@ int     ft_printf(const char *format, ...)
                 k++;
             }
         }
+
         else
             write(1,&format[i],1);
 	    k++;
@@ -62,6 +109,6 @@ int     ft_printf(const char *format, ...)
 
 int main()
 {
-	ft_printf("%%\n");
-	printf("%%\n");
+	ft_printf("%u\n",-88);
+	printf("%u\n",-88);
 }
