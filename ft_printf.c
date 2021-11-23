@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
+
 static void ft_hex(unsigned int h, char t)
 {
     char    *hex;
@@ -17,19 +18,19 @@ static void ft_hex(unsigned int h, char t)
     }
     write (1,&hex[h % 16],1);
 }
+
 static void ft_hexp(unsigned int y)
 {
     char    *hex;
 
     hex = "0123456789abcdef";
-    write (1,"0",1);
-    write (1,"x",1);
     if (y > 15)
     {
         ft_hexp(y / 16);
     }
     write (1,&hex[y % 16],1);
 }
+
 static void ft_putnbr(int n)
 {
     if (n == -2147483648)
@@ -59,6 +60,7 @@ static void ft_foru(unsigned int n)
 	n = n % 10 + '0';
 	write(1, &n, 1);
 }
+
 int     ft_printf(const char *format, ...)
 {
     int i = 0;
@@ -69,18 +71,18 @@ int     ft_printf(const char *format, ...)
 
     va_start(apy,format);
     
-    while (format[i])
+    while(format[i])
     {
         if (format[i] == '%')
         {
             i++;
-            if (format[i] == 'c')
+            if(format[i] == 'c')
             {
                 ch = va_arg(apy,int);
                 write(1,&ch,1);
                 k++;
             }
-            else if (format[i] == 's')
+            else if(format[i] == 's')
             {
                 int j = 0;
                 char *ptr;
@@ -92,21 +94,18 @@ int     ft_printf(const char *format, ...)
                     k++;
                 }
             }
-
-            else if (format[i] == 'i' || format[i] == 'd')
+            else if(format[i] == 'i' || format[i] == 'd')
             {
                 int g = va_arg(apy,int);
                 ft_putnbr(g);
                 k++;
             }
-            
-            else if (format[i] == 'u')
+            else if(format[i] == 'u')
             {
                 unsigned int e = va_arg(apy,unsigned int);
                 ft_foru(e);
             }
-            
-            else if (format[i] == '%')
+            else if(format[i] == '%')
             {
                 char t = '%';
                 write(1,&t,1);
@@ -121,6 +120,7 @@ int     ft_printf(const char *format, ...)
             else if (format[i] == 'p')
             {
                 unsigned int he = va_arg(apy, unsigned int);
+                write(1,"0x",2);
                 ft_hexp(he);
             }
         }
@@ -132,6 +132,11 @@ int     ft_printf(const char *format, ...)
     va_end(apy);
     return (k);
 }
+
+
+
+static 
+
 
 
 int main()
