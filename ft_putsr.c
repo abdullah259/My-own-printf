@@ -1,6 +1,6 @@
 #include "printf.h"
 
-void    ft_putstr(char *s)
+int    ft_putstr(char *s)
 {
     int j;
 
@@ -9,6 +9,6 @@ void    ft_putstr(char *s)
     {
         ft_putchar(s[j]);
         j++;
-        s++;
     }
+    return(j);
 }

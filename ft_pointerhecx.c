@@ -1,13 +1,16 @@
 #include "printf.h"
 
-void ft_hexp(unsigned int y)
+int ft_hexp(unsigned long long int y,int k)
 {
     char    *hex;
 
     hex = "0123456789abcdef";
-    if (y > 15)
+    if (y > 16)
     {
-        ft_hexp(y / 16);
+        ft_hexp(y / 16,k);
     }
-    write (1,&hex[y % 16],1);
+    // write (1,&hex[y % 16],1);
+    k += ft_putchar(hex[y % 16]);
+    returrn (k);
 }
+

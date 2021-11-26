@@ -1,6 +1,6 @@
 #include "printf.h"
 
-void ft_hex(unsigned int h, char t)
+int     ft_hex(unsigned int h, char t,int k)
 {
     char    *hex;
 
@@ -11,8 +11,9 @@ void ft_hex(unsigned int h, char t)
     }
     if (h > 15)
     {
-        ft_hex(h / 16,t);
+        ft_hex(h / 16,t,k);
     }
     // write (1,&hex[h % 16],1);
-    ft_putchar(hex[h % 16]);
+    k += ft_putchar(hex[h % 16]);
+    return (k);
 }

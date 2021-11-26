@@ -6,13 +6,13 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-void ft_hex(unsigned int h, char t);
+int 	ft_hex(unsigned int h, char t,int k);
 int     ft_printf(const char *format, ...);
-void    ft_putstr(char *s);
+int    ft_putstr(char *s);
 int     ft_putchar(char c);
-void ft_foru(unsigned int n);
-void ft_putnbr(int n);
-void ft_hexp(unsigned int y);
+int 	ft_foru(unsigned int n,int k);
+int 	ft_putnbr(int n,int k);
+int 	ft_hexp(unsigned long long int y,int k);
 #endif
 
 
